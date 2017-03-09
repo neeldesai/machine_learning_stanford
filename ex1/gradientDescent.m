@@ -16,10 +16,9 @@ for iter = 1:num_iters
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCost) and gradient here.
     %
-
-
-
-
+    theta1 = theta(1,1) - (alpha/m)*(sum(((theta'*X' - y'))*X(:,1)))
+    theta2 = theta(2,1) - (alpha/m)*(sum(((theta'*X' - y'))*X(:,2)))
+    theta = [theta1;theta2]
 
 
 
@@ -27,7 +26,7 @@ for iter = 1:num_iters
 
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
-
+    %pause
 end
 
 end
