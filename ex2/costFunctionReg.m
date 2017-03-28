@@ -31,11 +31,8 @@ temp_theta = theta;
 % the gradient and not have to use two separate equation for gradient
 % calculation
 temp_theta(1) = 0;
-
-grad = (sum((h - y).*X))/num_elements;
-for i = 1:size(theta, 1)
-    grad(i) = grad(i) + (lambda*temp_theta(i))/(num_elements);
-end
+regularization = (lambda/num_elements).*temp_theta;
+grad = ((sum((h - y).*X))/num_elements) + regularization';
 
 % =============================================================
 
