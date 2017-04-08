@@ -9,7 +9,7 @@ num_labels = size(Theta2, 1);
 
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
-
+X = [ones(m, 1) X];
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
 %               your learned neural network. You should set p to a 
@@ -20,14 +20,18 @@ p = zeros(size(X, 1), 1);
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
+z_2 = X*Theta1';
+layer_2 = sigmoid(z_2);
 
+rows_layer_2 = size(layer_2, 1);
+layer_2 = [ones(rows_layer_2, 1) layer_2];
 
+z_3 = layer_2*Theta2';
+layer_3 = sigmoid(z_3);
 
-
-
-
-
-
+for c = 1:m
+    p(c) = find(layer_3(c,:)==max(layer_3(c,:)));
+end
 
 % =========================================================================
 

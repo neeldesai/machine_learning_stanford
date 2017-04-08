@@ -37,13 +37,26 @@ grad = zeros(size(theta));
 %
 
 
+h = sigmoid(X*theta);
 
+term_1 = y.*log(h);
+term_2 = (1 - y).*log(1 - h);
+num_elements = size(y,1);
 
+sq_theta = theta.^2;
+% make the first element of sq_theta as 0 since it is not to be added
+% with the other elements for regularization.
+sq_theta(1) = 0;
 
+J = (sum(-term_1 - term_2))/num_elements + (lambda*sum(sq_theta))/(2*num_elements);
 
-
-
-
+temp_theta = theta;
+% Make the first element as 0 so we can use the generic equation to find 
+% the gradient and not have to use two separate equation for gradient
+% calculation
+temp_theta(1) = 0;
+regularization = (lambda/num_elements).*temp_theta;
+grad = ((sum((h - y).*X))/num_elements) + regularization';
 
 % =============================================================
 
